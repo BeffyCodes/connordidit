@@ -1,4 +1,3 @@
-
 const api = "https://reactnd-books-api.udacity.com"
 
 
@@ -13,14 +12,18 @@ const headers = {
 }
 
 export const get = (bookId) =>
-  fetch(`${api}/books/${bookId}`, { headers })
-    .then(res => res.json())
-    .then(data => data.book)
+  fetch(`${api}/books/${bookId}`, {
+    headers
+  })
+  .then(res => res.json())
+  .then(data => data.book)
 
 export const getAll = () =>
-  fetch(`${api}/books`, { headers })
-    .then(res => res.json())
-    .then(data => data.books)
+  fetch(`${api}/books`, {
+    headers
+  })
+  .then(res => res.json())
+  .then(data => data.books)
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
@@ -29,7 +32,9 @@ export const update = (book, shelf) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ shelf })
+    body: JSON.stringify({
+      shelf
+    })
   }).then(res => res.json())
 
 export const search = (query) =>
@@ -39,6 +44,8 @@ export const search = (query) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ query })
+    body: JSON.stringify({
+      query
+    })
   }).then(res => res.json())
-    .then(data => data.books)
+  .then(data => data.books)
