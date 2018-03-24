@@ -3,10 +3,17 @@ import React from 'react';
 class Book extends React.Component {
 
 changeBook = (newShelf) => {
-    this.props.moveBook(this.props.id, this.props.shelf, newShelf);
+    if (newShelf !== "none") {
+        this.props.moveBook(this.props.id, this.props.shelf, newShelf);
+    } else {
+        this.props.removeBook(this.props.id);
+    }
 }
 
     render() {
+        // console.log("title", this.props.title)
+        // console.log("authors", this.props.authors)
+        const authors = this.props.authors.map((author, index) => <div key={index} className="book-authors">{author}</div>);
         return (
             <div className="book">
                 <div className="book-top">
@@ -21,8 +28,8 @@ changeBook = (newShelf) => {
                         </select>
                     </div>
                 </div>
-                <div className="book-title">{this.props.name}</div>
-                <div className="book-authors">{this.props.author}</div>
+                <div className="book-title">{this.props.title}</div>
+                {authors}
             </div>
         )
     }

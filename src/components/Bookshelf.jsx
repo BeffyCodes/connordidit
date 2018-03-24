@@ -2,16 +2,29 @@ import React from 'react';
 import Book from './Book';
 
 class Bookshelf extends React.Component {
+  findBookFromID(id) {
+    return this.props.books.find((book) => book.id === id)
+  }
+
+  moveBook = (bookId, currentShelf, newShelf) => {
+    this.props.moveBook(this.findBookFromID(bookId), this.props.shelfArrayName, newShelf);
+  }
+
+  removeBook = (bookId) => {
+    this.props.removeBook(this.findBookFromID(bookId), this.props.shelfArrayName)
+  }
+
   render() {
     const books = this.props.books.map((book) => (
       <li key={book.id}>
         <Book
           id={book.id}
-          name={book.name}
-          author={book.author}
-          cover={book.cover}
+          title={book.title}
+          authors={book.authors || []}
+          cover={(book.imageLinks && book.imageLinks.thumbnail) || ""}
           shelf={this.props.shelfName}
-          moveBook={this.props.moveBook}
+          moveBook={this.moveBook}
+          removeBook={this.removeBook}
         />
       </li>
     ));
