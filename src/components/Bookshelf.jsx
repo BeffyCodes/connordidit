@@ -6,12 +6,12 @@ class Bookshelf extends React.Component {
     return this.props.books.find((book) => book.id === id)
   }
 
-  moveBook = (bookId, currentShelf, newShelf) => {
-    this.props.moveBook(this.findBookFromID(bookId), this.props.shelfArrayName, newShelf);
+  moveBook = (bookId, newShelf) => {
+    this.props.moveBook(this.findBookFromID(bookId), newShelf);
   }
 
   removeBook = (bookId) => {
-    this.props.removeBook(this.findBookFromID(bookId), this.props.shelfArrayName)
+    this.props.removeBook(this.findBookFromID(bookId));
   }
 
   render() {
@@ -22,7 +22,7 @@ class Bookshelf extends React.Component {
           title={book.title}
           authors={book.authors || []}
           cover={(book.imageLinks && book.imageLinks.thumbnail) || ""}
-          shelf={this.props.shelfName}
+          shelf={book.shelf}
           moveBook={this.moveBook}
           removeBook={this.removeBook}
         />

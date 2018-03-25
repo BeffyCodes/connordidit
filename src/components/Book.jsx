@@ -3,9 +3,9 @@ import React from 'react';
 class Book extends React.Component {
 
 changeBook = (newShelf) => {
-    if (newShelf !== "none") {
-        this.props.moveBook(this.props.id, this.props.shelf, newShelf);
-    } else {
+    if (newShelf !== "none" && newShelf !== this.props.shelf) {
+        this.props.moveBook(this.props.id, newShelf);
+    } else if (newShelf === "none") {
         this.props.removeBook(this.props.id);
     }
 }
@@ -15,6 +15,7 @@ changeBook = (newShelf) => {
         // console.log("authors", this.props.authors)
         const authors = this.props.authors.map((author, index) => <div key={index} className="book-authors">{author}</div>);
         return (
+            // <div className={"book " + this.props.selected} onClick={(e) => this.props.toggleSelection(this.props.id)}>
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + this.props.cover + ')' }}></div>
