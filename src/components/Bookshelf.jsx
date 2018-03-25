@@ -14,6 +14,14 @@ class Bookshelf extends React.Component {
     this.props.removeBook(this.findBookFromID(bookId));
   }
 
+  toggleSelection = (bookId) => {
+    this.props.toggleSelection(this.findBookFromID(bookId));
+  }
+
+  // bulkMove = () => {
+
+  // }
+
   render() {
     const books = this.props.books.map((book) => (
       <li key={book.id}>
@@ -23,8 +31,10 @@ class Bookshelf extends React.Component {
           authors={book.authors || []}
           cover={(book.imageLinks && book.imageLinks.thumbnail) || ""}
           shelf={book.shelf}
+          selected={book.selected}
           moveBook={this.moveBook}
           removeBook={this.removeBook}
+          toggleSelection={this.toggleSelection}
         />
       </li>
     ));

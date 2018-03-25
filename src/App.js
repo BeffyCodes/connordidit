@@ -9,8 +9,7 @@ class BooksApp extends React.Component {
   state = {
     currentlyReading: [],
     wantToRead: [],
-    read: [],
-    // selectedBooks: []
+    read: []
   }
 
   componentDidMount() {
@@ -67,11 +66,26 @@ class BooksApp extends React.Component {
     })
   }
 
-  bookSelected = (book) => {
-    if (this.state.selectedBooks.indexOf(book)) {
+  toggleSelection = (book) => {
+    this.setState((previousState) => {
+      let oldState = previousState;
 
-    }
+      oldState[book.shelf][oldState[book.shelf].indexOf(book)].selected = !oldState[book.shelf][oldState[book.shelf].indexOf(book)].selected;
+
+      return oldState;
+    });
   }
+
+  // bulkMoveBooks = (books) => {
+  //   this.setState((previousState) => {
+  //     let booksToMove = [];
+  //   });
+  //   booksToMove.push(this.state)
+  //   books.map(() => {
+  //     BooksAPI.
+  //     //book.filter
+  //   })
+  // }
 
   render() {
     return (
@@ -89,6 +103,7 @@ class BooksApp extends React.Component {
                   books={this.state.currentlyReading}
                   moveBook={this.moveBook}
                   removeBook={this.removeBook}
+                  toggleSelection={this.toggleSelection}
                 />
                 <Bookshelf
                   shelfName="Want to Read"
@@ -96,6 +111,7 @@ class BooksApp extends React.Component {
                   books={this.state.wantToRead}
                   moveBook={this.moveBook}
                   removeBook={this.removeBook}
+                  toggleSelection={this.toggleSelection}
                 />
                 <Bookshelf
                   shelfName="Read"
@@ -103,6 +119,7 @@ class BooksApp extends React.Component {
                   books={this.state.read}
                   moveBook={this.moveBook}
                   removeBook={this.removeBook}
+                  toggleSelection={this.toggleSelection}
                 />
               </div>
             </div>
